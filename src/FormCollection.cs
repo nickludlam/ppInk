@@ -4051,6 +4051,8 @@ namespace gInk
                     System.IO.Directory.CreateDirectory(st);
                 if (IC.Ink.Strokes.Count > 0)          // do not save it if there is no data to save
                     SaveStrokes(st + "AutoSave.strokes.txt");
+                if (Root.PersistentDrawing)
+                    SaveStrokes(st + "Persistent.strokes.txt"); // Save persistent strokes file, even if it will contain nothing
             }
             catch (Exception ex)
             {

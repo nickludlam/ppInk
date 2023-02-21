@@ -216,6 +216,7 @@ namespace gInk
         public bool AllowDraggingToolbar = true;
         public bool AllowHotkeyInPointerMode = true;
         public int gpButtonsLeft, gpButtonsTop;
+        public bool PersistentDrawing = false;
 
         // advanced options
         public string CloseOnSnap = "blankonly";
@@ -554,6 +555,10 @@ namespace gInk
                 StartInk();
                 if (OpenIntoSnapMode)
                     FormCollection.btSnap_Click(null,null);
+                if (PersistentDrawing)
+                {
+                    FormCollection.LoadStrokes(Path.GetFullPath(Environment.ExpandEnvironmentVariables(SnapshotBasePath + "Persistent.strokes.txt")));
+                }
             }
             /*
             else if (PointerMode)
@@ -1782,6 +1787,10 @@ namespace gInk
                         case "ERASE_ON_FOCUSLOST":
                             if (sPara.ToUpper() == "TRUE" || sPara == "1" || sPara.ToUpper() == "ON")
                                 EraseOnLoosingFocus = true;
+                            break;
+                        case "PERSISTENT_DRAWING":
+                            if (sPara.ToUpper() == "TRUE" || sPara == "1" || sPara.ToUpper() == "ON")
+                                PersistentDrawing = true;
                             break;
                     }
                 }
